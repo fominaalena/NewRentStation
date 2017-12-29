@@ -29,5 +29,9 @@ public class AvailableEquipment {
 	public void removeEquipment(Equipment equipment) {
 		availableEquipment.remove(equipment);
 	}
+
+	public void setAvailableEquipment(List<Equipment> availableEquipment) {
+		this.availableEquipment = availableEquipment;
+	}
 	
 }

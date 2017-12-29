@@ -6,7 +6,7 @@ public class MainMenuAction extends BaseMenuAction {
 	protected void printText() {
 		System.out.println("1. View available equipment");
 		System.out.println("2. View rented items");
-		System.out.println("6. Close application");
+		System.out.println("3. Close application");
 	}
 
 	@Override
@@ -18,11 +18,8 @@ public class MainMenuAction extends BaseMenuAction {
 		case 2:
 			new RentedEquipmentMenuAction().perform();
 			break;
-		//case 3:
-			//new InputClientIdMenuAction().perform();
-			//break;
-		case 6:
-			//new CloseApplicationMenuAction().perform();
+		case 3:
+			new CloseApplicationMenuAction().perform();
 			break;
 		default:
 			break;

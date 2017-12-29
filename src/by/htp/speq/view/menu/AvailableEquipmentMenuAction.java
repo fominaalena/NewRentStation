@@ -11,12 +11,7 @@ import by.htp.speq.station.AvailableEquipment;
 import by.htp.speq.station.RentedEquipment;
 
 public class AvailableEquipmentMenuAction extends BaseMenuAction {
-
-	private StationLogic logic;
-	{
-		logic = new ConsoleStationLogicImpl();
-	}
-
+	
 	public AvailableEquipmentMenuAction() {
 	}
 
@@ -40,8 +35,7 @@ public class AvailableEquipmentMenuAction extends BaseMenuAction {
 			new MainMenuAction().perform();
 		} else {
 			try {
-				new InputClientIdMenuAction(logic.readAvailableEquipment().getAvailableEquipment().get(userInput - 1))
-						.perform();
+				new InputClientIdMenuAction(logic.readAvailableEquipment().getAvailableEquipment().get(userInput - 1)).perform();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}

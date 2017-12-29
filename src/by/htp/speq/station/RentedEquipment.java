@@ -25,6 +25,10 @@ public class RentedEquipment {
 	public void addRentUnit(RentUnit rentUnit) {
 		units.add(rentUnit);
 	}
+
+	public void setUnits(List<RentUnit> units) {
+		this.units = units;
+	}
 	
 	
 }

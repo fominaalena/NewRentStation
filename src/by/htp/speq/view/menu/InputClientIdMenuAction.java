@@ -1,11 +1,14 @@
 package by.htp.speq.view.menu;
 
 import java.io.FileNotFoundException;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import by.htp.speq.entity.Client;
 import by.htp.speq.entity.Equipment;
+import by.htp.speq.entity.Equipment.Type;
 import by.htp.speq.entity.RentUnit;
 import by.htp.speq.logic.ConsoleStationLogicImpl;
 import by.htp.speq.logic.StationLogic;
@@ -13,14 +16,9 @@ import by.htp.speq.station.AvailableEquipment;
 import by.htp.speq.station.RentedEquipment;
 
 public class InputClientIdMenuAction extends BaseMenuAction {
-	
-	private StationLogic logic;	
+
 	Equipment equipment;
-	
-	{
-		logic = new ConsoleStationLogicImpl();
-	}
-	
+
 	public InputClientIdMenuAction(Equipment equipment) {
 		this.equipment = equipment;
 	}
@@ -32,19 +30,36 @@ public class InputClientIdMenuAction extends BaseMenuAction {
 
 	@Override
 	protected void handleUserInput(int userInput) {
-		//TODO: validate counters
 		try {
 			List<Equipment> availableEquipment = logic.readAvailableEquipment().getAvailableEquipment();
 			List<RentUnit> units = logic.readRentedEquipment().getUnits();
-			availableEquipment.remove(equipment);
-			RentUnit rentUnit = new RentUnit(equipment, new Date(), new Client(userInput));
-			units.add(rentUnit);
-			logic.writeAvailableEquipment(new AvailableEquipment(availableEquipment));
-			logic.writeRentedEquipment(new RentedEquipment(units));
+			if (equipment.getType() == Type.OUTFIT && canRentMoreItems(userInput, units) || equipment.getType() == Type.ACCESSORY) {
+					availableEquipment.remove(equipment);
+					RentUnit rentUnit = new RentUnit(equipment, new Date(), new Client(userInput));
+					units.add(rentUnit);
+					logic.writeAvailableEquipment(new AvailableEquipment(availableEquipment));
+					logic.writeRentedEquipment(new RentedEquipment(units));
+				}
 			new MainMenuAction().perform();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
+	public boolean canRentMoreItems(int clientId, List<RentUnit> units) {
+		int count = 1;
+		for (RentUnit rentUnit : units) {
+			if (rentUnit.getEquipment().getType() == Type.OUTFIT) {
+				if (rentUnit.getClient().id == clientId) {
+					count++;
+				}
+				if (count > 3) {
+					System.out.println("You can't get more than 3 items");
+					System.out.println("----------");
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 }

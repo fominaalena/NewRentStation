@@ -4,12 +4,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import by.htp.speq.logic.ConsoleStationLogicImpl;
+import by.htp.speq.logic.StationLogic;
+import by.htp.speq.logic.XMLFileStationLogic;
+
 public abstract class BaseMenuAction {
-
+	
 	protected abstract void printText();
-
 	
 	protected abstract void handleUserInput(int userInput);
+	
+	protected static StationLogic logic;
+	static
+	{
+		logic = new XMLFileStationLogic();
+	}
 
 	public BaseMenuAction() {
 	}

@@ -16,19 +16,31 @@ public class ConsoleStationLogicImpl implements StationLogic {
 	
 	private static AvailableEquipment availableEquipment;
 	private static RentedEquipment rentedEquipment;
+	private double income;
+	private double fine;
 	
-	static {
-		AvailableEquipment availableEquipment = new AvailableEquipment();
-		Equipment eq1 = new Equipment("Bike", Equipment.Type.OUTFIT, 8.5);
-		Equipment eq2 = new Equipment("Skiing", Equipment.Type.OUTFIT, 3.5);
-		Equipment eq3 = new Equipment("Helmet", Equipment.Type.ACCESSORY, 2.5);
-		availableEquipment.addEquipment(eq1);
-		availableEquipment.addEquipment(eq2);
-		availableEquipment.addEquipment(eq3);
-		ConsoleStationLogicImpl.availableEquipment = availableEquipment;
-		RentedEquipment rentedEquipment = new RentedEquipment();
-		ConsoleStationLogicImpl.rentedEquipment = rentedEquipment;
-	}
+//	static {
+//		AvailableEquipment availableEquipment = new AvailableEquipment();
+//		Equipment eq1 = new Equipment("Bike", Equipment.Type.OUTFIT, 8.5);
+//		Equipment eq2 = new Equipment("Skiing", Equipment.Type.OUTFIT, 3.5);
+//		Equipment eq3 = new Equipment("Helmet", Equipment.Type.ACCESSORY, 2.5);
+//		Equipment eq4 = new Equipment("Bicycle", Equipment.Type.ACCESSORY, 2.5);
+//		Equipment eq5 = new Equipment("Lifeline", Equipment.Type.ACCESSORY, 2.5);
+//		Equipment eq6 = new Equipment("Lifeline11", Equipment.Type.ACCESSORY, 2.5);
+//		Equipment eq7 = new Equipment("Skiing11", Equipment.Type.OUTFIT, 3.5);
+//		Equipment eq8 = new Equipment("Skiing22", Equipment.Type.OUTFIT, 3.5);
+//		availableEquipment.addEquipment(eq1);
+//		availableEquipment.addEquipment(eq2);
+//		availableEquipment.addEquipment(eq3);
+//		availableEquipment.addEquipment(eq4);
+//		availableEquipment.addEquipment(eq5);
+//		availableEquipment.addEquipment(eq6);
+//		availableEquipment.addEquipment(eq7);
+//		availableEquipment.addEquipment(eq8);
+//		ConsoleStationLogicImpl.availableEquipment = availableEquipment;
+//		RentedEquipment rentedEquipment = new RentedEquipment();
+//		ConsoleStationLogicImpl.rentedEquipment = rentedEquipment;
+//	}
 
 	@Override
 	public RentedEquipment readRentedEquipment() {
@@ -61,6 +73,26 @@ public class ConsoleStationLogicImpl implements StationLogic {
 	@Override
 	public void writeAvailableEquipment(AvailableEquipment availableEquipment) throws FileNotFoundException {
 		ConsoleStationLogicImpl.availableEquipment = availableEquipment;
+	}
+
+	@Override
+	public void addIncome(double income){
+		this.income += income;
+	}
+
+	@Override
+	public void addFines(double fine){
+		this.fine += fine;
+	}
+
+	@Override
+	public double income() {
+		return income;
+	}
+
+	@Override
+	public double fine() {
+		return fine;
 	}
 
 }

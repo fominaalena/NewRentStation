@@ -24,5 +24,28 @@ public class RentUnit {
 		return "RentUnit [equipment=" + equipment + ", rentDate=" + rentDate + ", client=" + client + "]";
 	}
 
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Equipment getEquipment() {
+		return equipment;
+	}
+
+	public void setEquipment(Equipment equipment) {
+		this.equipment = equipment;
+	}
+
+	public Date getRentDate() {
+		return rentDate;
+	}
+
+	public void setRentDate(Date rentDate) {
+		this.rentDate = rentDate;
+	}
 	
 }

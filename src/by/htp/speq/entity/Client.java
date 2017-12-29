@@ -8,5 +8,10 @@ public class Client {
 		super();
 		this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "Client [id=" + id + "]";
+	}
 	
 }
